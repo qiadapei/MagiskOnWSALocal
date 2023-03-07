@@ -16,8 +16,10 @@ jobs:
         
     - name: Build
       run: |
-        bash ./scripts/build.sh --arch x64 --release-type retail --magisk-ver stable --gapps-brand MindTheGapps --gapps-variant pico --remove-amazon --root-sol magisk --compress    --compress-format zip
-        mv ./output/*.zip ./
+        sudo apt update
+        sudo apt install lzip wine winetricks patchelf e2fsprogs aria2 python3 python3-pip aria2 p7zip-full attr unzip xz-utils
+        sudo bash ./scripts/build.sh --arch x64 --release-type retail --magisk-ver stable --gapps-brand MindTheGapps --gapps-variant pico --remove-amazon --root-sol magisk --compress    --compress-format zip
+        sudo mv ./output/*.zip ./
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
